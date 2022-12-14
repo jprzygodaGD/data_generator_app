@@ -148,9 +148,12 @@ class ArgumentProcessor:
                 for j in range(self.data_lines):
                     current_opened_file.write("{")
                     line = self.generate_data(schema)
-                    for key, value in line.items():
-                        current_opened_file.write(f'"{key}": "{value}", ')
-                    current_opened_file.write('},\n')
+                    for idx, (key, val) in enumerate(line.items()):
+                        if idx == len(line)-1:
+                            current_opened_file.write(f'"{key}": "{val}"')
+                        else:
+                            current_opened_file.write(f'"{key}": "{val}", ')
+                    current_opened_file.write("}\n")
 
     def produce_output(self):
         """Writes generated lines to file or prints them."""
@@ -164,8 +167,10 @@ class ArgumentProcessor:
             logging.info("Started to generate files")
             max_tasks = math.ceil(self.file_count / self.multiprocessing)
             with multiprocessing.Pool(self.multiprocessing) as pool:
-                _ = pool.starmap(self.create_files, [(self.file_count, data_schema)], chunksize=max_tasks)
-            logging.info("Generating files is now finished")
+                _ = pool.starmap_async(self.create_files, [(self.file_count, data_schema)], chunksize=max_tasks)
+                pool.close()
+                pool.join()
+                logging.info("Generating files finished")
 
         else:
             logging.info("Printing generated data ...")
