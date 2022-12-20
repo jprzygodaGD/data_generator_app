@@ -45,7 +45,7 @@ class ArgumentProcessor:
         elif file_path.startswith('/'):
             output_dir_path = file_path
         else:
-            output_dir_path = os.getcwd() + '/' + file_path
+            output_dir_path = os.path.join(os.getcwd(), file_path)
 
         # check if path exists
         if os.path.isdir(output_dir_path):
