@@ -7,6 +7,8 @@ Application generates test data in JSON fromat in a specified schema.
 1. python3 -m pip install .
 2. data_generator [-h] [--file_count FILE_COUNT] [--file_name FILE_NAME] [--file_prefix {count,random,uuid}] [--data_schema DATA_SCHEMA] 
 [--data_linesDATA_LINES] [--clear_path] [--multiprocessing MULTIPROCESSING] file_path
+3. If data_generator is not recognized execute:
+export PYTHONPATH=path_to_data_generator_app
 
 ## Contents: <br />
 - app.py - main module
