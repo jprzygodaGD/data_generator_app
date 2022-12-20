@@ -13,7 +13,7 @@ TEST_DIR_2 = "test_output"
 
 test_params_valid = [
     (TEST_DIR_1, TEST_DIR_1),
-    (TEST_DIR_2, "/Users/jprzygoda/data_generator_app/test_console_utility/test_output"),
+    (TEST_DIR_2, os.getcwd() + '/' + TEST_DIR_2),
     (".", os.getcwd())
 ]
 
